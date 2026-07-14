@@ -29,7 +29,6 @@ echo 127.0.0.1 > ansible_hosts
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N "" && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 ansible-playbook -i ansible_hosts configure.yaml
 source ~/.bashrc
-newgrp docker
 
 #
 # Set up the anvil repo: Rust toolchain, Verus, and the LOC tooling
@@ -40,3 +39,12 @@ if [ ! -d ~/anvil ]; then
 fi
 bash ~/anvil/tools/setup-welder-env.sh
 pip3 install tabulate
+
+#
+# Make cargo and Verus available in future login shells
+#
+
+grep -qF '. "$HOME/.cargo/env"' ~/.bashrc || echo '. "$HOME/.cargo/env"' >> ~/.bashrc
+grep -qF 'export PATH="$PATH:$HOME/verus"' ~/.bashrc || echo 'export PATH="$PATH:$HOME/verus"' >> ~/.bashrc
+
+newgrp docker
