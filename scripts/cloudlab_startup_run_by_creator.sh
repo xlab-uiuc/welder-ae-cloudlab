@@ -30,3 +30,13 @@ ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N "" && cat ~/.ssh/id_rsa.pub >> 
 ansible-playbook -i ansible_hosts configure.yaml
 source ~/.bashrc
 newgrp docker
+
+#
+# Set up the anvil repo: Rust toolchain, Verus, and the LOC tooling
+#
+
+if [ ! -d ~/anvil ]; then
+    git clone --branch sosp26 https://github.com/anvil-verifier/anvil.git ~/anvil
+fi
+bash ~/anvil/tools/setup-welder-env.sh
+pip3 install tabulate
