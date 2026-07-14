@@ -1,6 +1,6 @@
 """Profile for running Acto on CloudLab. There is one single physical node. The
 OS image is hardwired to Ubuntu 22.04. The hardware type is hardwired to
-`c6420`.
+`c220g5`.
 
 Instructions:
 Wait for the experiment to start, and then log into the node by either way:
@@ -32,7 +32,7 @@ request = pc.makeRequestRSpec()
 
 # Fixate parameters
 osImage  = 'urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU22-64-STD'
-phystype = 'c6420'
+phystype = 'c220g5'
 
 node = request.RawPC(hostname)
 node.disk_image    = osImage
