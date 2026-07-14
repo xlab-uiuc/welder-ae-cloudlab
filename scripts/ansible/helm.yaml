@@ -1,0 +1,39 @@
+---
+- name: Install Helm from binary release
+  hosts: all
+  become: yes
+
+  vars:
+    helm_version: "v4.0.1"
+    helm_arch: "linux-amd64"
+    helm_tarball: "helm-{{ helm_version }}-{{ helm_arch }}.tar.gz"
+    helm_url: "https://get.helm.sh/{{ helm_tarball }}"
+
+  tasks:
+    - name: Download Helm tarball
+      get_url:
+        url: "{{ helm_url }}"
+        dest: "/tmp/{{ helm_tarball }}"
+        mode: '0644'
+      register: helm_download
+
+    - name: Extract Helm tarball
+      unarchive:
+        src: "/tmp/{{ helm_tarball }}"
+        dest: /tmp
+        remote_src: yes
+      when: helm_download.changed
+
+    - name: Install helm binary
+      copy:
+        src: "/tmp/{{ helm_arch }}/helm"
+        dest: /usr/local/bin/helm
+        mode: '0755'
+        remote_src: yes
+      notify: remove_extracted_dir
+
+  handlers:
+    - name: remove_extracted_dir
+      file:
+        path: "/tmp/{{ helm_arch }}"
+        state: absent
