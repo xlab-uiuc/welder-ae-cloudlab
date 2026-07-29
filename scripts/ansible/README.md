@@ -31,8 +31,8 @@ Note: because some system packages in some older distro (e.g. Ubuntu 20.04)
     requires python3 to point to Python3.8,
     and Acto currently requires Python3.10,
     the `configure.yaml` uses the `python-venv.yaml` to install the
-    python environment in the `$HOME/workdir/acto/venv`.
-    To use the venv, (for bash) run `source $HOME/workdir/acto/venv/bin/activate`
+    python environment in the `$HOME/workdir/acto/venv-welder`.
+    To use the venv, (for bash) run `source $HOME/workdir/acto/venv-welder/bin/activate`
     before running Acto.
     Optionally, `python-venv.yaml` can be swapped to `python.yaml` playbook
     to directly install the environment under the system python environment.

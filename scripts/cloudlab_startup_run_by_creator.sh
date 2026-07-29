@@ -102,13 +102,13 @@ if [ ! -d ~/anvil ]; then
     git clone --branch sosp26 https://github.com/anvil-verifier/anvil.git ~/anvil
 fi
 bash ~/anvil/tools/setup-welder-env.sh
-pip3 install tabulate
 
 #
-# Make cargo and Verus available in future login shells
+# Make cargo, Verus, and the acto Python venv available in future login shells
 #
 
 grep -qF '. "$HOME/.cargo/env"' ~/.bashrc || echo '. "$HOME/.cargo/env"' >> ~/.bashrc
 grep -qF 'export PATH="$PATH:$HOME/verus"' ~/.bashrc || echo 'export PATH="$PATH:$HOME/verus"' >> ~/.bashrc
+grep -qF 'workdir/acto/venv-welder/bin/activate' ~/.bashrc || echo 'source "$HOME/workdir/acto/venv-welder/bin/activate"' >> ~/.bashrc
 
 newgrp docker

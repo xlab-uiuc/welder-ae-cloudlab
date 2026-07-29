@@ -43,6 +43,7 @@
         # Implication: this script should happen after acto.yml
         requirements: "{{ home.stdout }}/workdir/acto/requirements-dev.txt"
         state: present
-        virtualenv: "{{ home.stdout }}/workdir/acto/venv"
+        # Name matches anvil/README.md's "own machine" instructions
+        virtualenv: "{{ home.stdout }}/workdir/acto/venv-welder"
         virtualenv_command: python3.12 -m venv
       become: false
