@@ -47,3 +47,10 @@
         virtualenv: "{{ home.stdout }}/workdir/acto/venv-welder"
         virtualenv_command: python3.12 -m venv
       become: false
+
+    - name: Install matplotlib (used by process_ts.py, missing from acto's requirements-dev.txt)
+      pip:
+        name: matplotlib
+        state: present
+        virtualenv: "{{ home.stdout }}/workdir/acto/venv-welder"
+      become: false
